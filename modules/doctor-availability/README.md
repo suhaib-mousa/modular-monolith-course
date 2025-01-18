@@ -13,10 +13,13 @@ This module follows Traditional Layered Architecture with the following layers:
 ### Project Structure
 ```
 DoctorAvailability/
-├── DoctorAvailability.Domain/        # Entities and domain models
-├── DoctorAvailability.Data/          # Data access and EF Core implementation
-├── DoctorAvailability.Business/      # Business logic and services
-└── DoctorAvailability.API/           # REST API endpoints
+├── src/
+    ├── DoctorAvailability.Domain/        # Entities and domain models
+    ├── DoctorAvailability.Data/          # Data access and EF Core implementation
+    ├── DoctorAvailability.Business/      # Business logic and services
+    └── DoctorAvailability.API/           # REST API endpoints
+├── test/
+    ├──DoctorAvailability.Tests/        # Unit testing
 ```
 
 ## Features
