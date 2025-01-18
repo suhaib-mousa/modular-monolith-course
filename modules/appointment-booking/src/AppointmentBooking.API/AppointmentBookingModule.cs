@@ -3,6 +3,7 @@ using AppointmentBooking.Application.Services;
 using AppointmentBooking.Domain.Repositories;
 using AppointmentBooking.Infrastructure.Data;
 using AppointmentBooking.Infrastructure.Repositories;
+using AppointmentConfirmation.API;
 using DoctorAvailability.API;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,5 +21,6 @@ public static class AppointmentBookingModule
         services.AddScoped<IAppointmentRepository, EfCoreAppointmentRepository>();
         services.AddScoped<IAppointmentService, AppointmentService>();
         services.AddDoctorAvailabilityModule(configuration);
+        services.AddAppointmentConfirmation();
     }
 }

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "FaQHrfcoFIxSxqxfJaJ0Nu0zk9ziwAgDBl6ZBP0L8SM=",
+  "Source": "AppointmentConfirmation.API",
+  "BasePath": "_content/AppointmentConfirmation.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

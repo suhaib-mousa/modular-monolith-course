@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\appointment-confirmation\AppointmentConfirmation.API\AppointmentConfirmation.API.csproj" />
     <ProjectReference Include="..\..\..\doctor-availability\src\DoctorAvailability.Business\DoctorAvailability.Business.csproj" />
     <ProjectReference Include="..\AppointmentBooking.Domain\AppointmentBooking.Domain.csproj" />
   </ItemGroup>

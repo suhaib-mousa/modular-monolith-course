@@ -2,7 +2,7 @@
 using AppointmentBooking.Application.Interfaces;
 using AppointmentBooking.Domain.Entities;
 using AppointmentBooking.Domain.Repositories;
-using DoctorAvailability.Business.DTOs;
+using AppointmentConfirmation.API.Services;
 using DoctorAvailability.Business.Services;
 using DoctorAvailability.Domain.Entities;
 
@@ -12,15 +12,16 @@ public class AppointmentService : IAppointmentService
 {
     private readonly IAppointmentRepository _appointmentRepository;
     private readonly ISlotService _slotService;
-    private readonly object _notificationService; // temp
+    private readonly INotificationService _notificationService;
 
     public AppointmentService(
         IAppointmentRepository appointmentRepository,
-        ISlotService slotService)
+        ISlotService slotService,
+        INotificationService notificationService)
     {
         _appointmentRepository = appointmentRepository;
         _slotService = slotService;
-        //_notificationService = notificationService;
+        _notificationService = notificationService;
     }
 
     public async Task<Result<AppointmentDto>> BookAppointmentAsync(BookAppointmentDto bookingDto)
@@ -35,14 +36,16 @@ public class AppointmentService : IAppointmentService
             if (slotResult.Value!.IsReserved)
                 return Result<AppointmentDto>.Failure("Slot is already reserved");
 
+            var slot = slotResult.Value;
+
             // Reserve the slot
-            await _slotService.ReserveSlotAsync(slotId: bookingDto.SlotId);
+            await _slotService.ReserveSlotAsync(slotId: slot.Id);
 
             // Create appointment
             var appointment = new Appointment
             {
                 Id = Guid.NewGuid(),
-                SlotId = bookingDto.SlotId,
+                SlotId = slot.Id,
                 PatientId = bookingDto.PatientId,
                 PatientName = bookingDto.PatientName,
                 ReservedAt = DateTime.UtcNow,
@@ -53,8 +56,9 @@ public class AppointmentService : IAppointmentService
 
             var appointmentDto = MapToDto(createdAppointment);
 
-            // Send confirmation notification ~ TODO
-            //await _notificationService.SendAppointmentConfirmationAsync(appointmentDto, slotResult.Value);
+            // Send confirmation notification
+            var message = GenerateNotificaionMessage(appointmentDto, slot.DoctorName);
+            await _notificationService.SendNotificationToUserAsync(message, userIds: [appointment.PatientId, slot.DoctorId]);
 
             return Result<AppointmentDto>.Success(appointmentDto);
         }
@@ -62,6 +66,18 @@ public class AppointmentService : IAppointmentService
         {
             return Result<AppointmentDto>.Failure(ex.Message);
         }
+    }
+
+    private string GenerateNotificaionMessage(AppointmentDto appointmentDto, string doctorName)
+    {
+        return $@"Dear {appointmentDto.PatientName},
+    
+            Your appointment has been confirmed with Dr. {doctorName}.
+            Details are as follows:
+            - Appointment Time: {appointmentDto.ReservedAt:dddd, MMMM dd, yyyy hh:mm tt}
+            - Appointment Status: {appointmentDto.Status}
+
+            Thank you for choosing our services.";
     }
 
     public async Task<Result<AppointmentDto>> GetAppointmentByIdAsync(Guid id)
