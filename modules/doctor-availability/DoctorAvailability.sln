@@ -3,21 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Domain", "DoctorAvailability.Domain\DoctorAvailability.Domain.csproj", "{ACDB7F2E-3B67-4B69-A0FB-7E8E2BAFEB17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Domain", "src\DoctorAvailability.Domain\DoctorAvailability.Domain.csproj", "{ACDB7F2E-3B67-4B69-A0FB-7E8E2BAFEB17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Data", "DoctorAvailability.Data\DoctorAvailability.Data.csproj", "{C6C62A70-9D1D-48D8-8BF7-A0314921AFBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Data", "src\DoctorAvailability.Data\DoctorAvailability.Data.csproj", "{C6C62A70-9D1D-48D8-8BF7-A0314921AFBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Business", "DoctorAvailability.Business\DoctorAvailability.Business.csproj", "{8A7417F5-4607-4E9A-B089-EE8173B615AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Business", "src\DoctorAvailability.Business\DoctorAvailability.Business.csproj", "{8A7417F5-4607-4E9A-B089-EE8173B615AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.API", "DoctorAvailability.API\DoctorAvailability.API.csproj", "{CCA3A506-192A-4049-BEFD-BEC869B63DCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.API", "src\DoctorAvailability.API\DoctorAvailability.API.csproj", "{CCA3A506-192A-4049-BEFD-BEC869B63DCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F1624C95-B26B-4A79-B9F0-609C5576B16B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4BA41CB9-FECA-4D5C-BAA3-774398E28D4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Tests", "test\DoctorAvailability.Tests\DoctorAvailability.Tests.csproj", "{48856E77-D0C3-4954-941B-C5836A4D6295}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ACDB7F2E-3B67-4B69-A0FB-7E8E2BAFEB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +39,19 @@ Global
 		{CCA3A506-192A-4049-BEFD-BEC869B63DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA3A506-192A-4049-BEFD-BEC869B63DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCA3A506-192A-4049-BEFD-BEC869B63DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48856E77-D0C3-4954-941B-C5836A4D6295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48856E77-D0C3-4954-941B-C5836A4D6295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48856E77-D0C3-4954-941B-C5836A4D6295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48856E77-D0C3-4954-941B-C5836A4D6295}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACDB7F2E-3B67-4B69-A0FB-7E8E2BAFEB17} = {F1624C95-B26B-4A79-B9F0-609C5576B16B}
+		{C6C62A70-9D1D-48D8-8BF7-A0314921AFBC} = {F1624C95-B26B-4A79-B9F0-609C5576B16B}
+		{8A7417F5-4607-4E9A-B089-EE8173B615AB} = {F1624C95-B26B-4A79-B9F0-609C5576B16B}
+		{CCA3A506-192A-4049-BEFD-BEC869B63DCC} = {F1624C95-B26B-4A79-B9F0-609C5576B16B}
+		{48856E77-D0C3-4954-941B-C5836A4D6295} = {4BA41CB9-FECA-4D5C-BAA3-774398E28D4B}
 	EndGlobalSection
 EndGlobal
