@@ -1,26 +1,21 @@
-﻿using DoctorAvailability.Domain.Entities;
+﻿using DoctorAvailability.Data.EntityFrameworkCore;
+using DoctorAvailability.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace DoctorAvailability.Data;
 
-public class SlotDbContext : DbContext
+public class SlotDbContext : DbContext, ISlotDbContext
 {
     public SlotDbContext(DbContextOptions<SlotDbContext> options) : base(options)
     {
     }
 
-    public DbSet<Slot> Slots => Set<Slot>();
+    public DbSet<Slot> Slots { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Slot>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.DoctorName).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.Cost).HasPrecision(18, 2);
-            entity.Property(e => e.Time).IsRequired();
-        });
+        modelBuilder.ConfigureSlots();
 
         base.OnModelCreating(modelBuilder);
     }

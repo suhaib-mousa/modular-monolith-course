@@ -63,8 +63,6 @@ public class SlotService : ISlotService
             var slot = new Slot
             {
                 Time = slotDto.Time,
-                DoctorId = slotDto.DoctorId,
-                DoctorName = slotDto.DoctorName,
                 Cost = slotDto.Cost,
                 IsReserved = false
             };
@@ -113,5 +111,16 @@ public class SlotService : ISlotService
         {
             return Result<bool>.Failure(ex.Message);
         }
+    }
+
+    public async Task ReserveSlotAsync(Guid slotId)
+    {
+        var existingSlot = await _slotRepository.GetByIdAsync(slotId);
+        if (existingSlot == null)
+        {
+            throw new Exception("Slot not found");
+        }
+        existingSlot.IsReserved = true;
+        await _slotRepository.UpdateAsync(existingSlot);
     }
 }

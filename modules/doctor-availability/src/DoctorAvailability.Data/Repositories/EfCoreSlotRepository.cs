@@ -1,6 +1,5 @@
 ﻿using DoctorAvailability.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Concurrent;
 
 namespace DoctorAvailability.Data.Repositories;
 
@@ -25,9 +24,8 @@ public class EfCoreSlotRepository : ISlotRepository
 
     public async Task<IEnumerable<Slot>> GetAvailableSlotsAsync()
     {
-        return await _context.Slots
-            .Where(s => !s.IsReserved)
-            .ToListAsync();
+        var query = _context.Slots.AsQueryable();
+        return await query.Where(s => !s.IsReserved).ToListAsync();
     }
 
     public async Task<Slot> CreateAsync(Slot slot)

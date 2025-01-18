@@ -11,5 +11,6 @@ public interface ISlotService
     Task<Result<Slot>> GetSlotByIdAsync(Guid id);
     Task<Result<Slot>> CreateSlotAsync(CreateSlotDto slotDto);
     Task<Result<bool>> UpdateSlotAsync(UpdateSlotDto slotDto);
+    Task ReserveSlotAsync(Guid slotId);
     Task<Result<bool>> DeleteSlotAsync(Guid id);
 }
