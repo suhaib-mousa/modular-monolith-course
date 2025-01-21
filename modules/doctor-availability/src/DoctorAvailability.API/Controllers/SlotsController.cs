@@ -33,7 +33,14 @@ public class SlotsController : ControllerBase
             return BadRequest(result.Error);
         return Ok(result.Value);
     }
-
+    [HttpPost]
+    public async Task<IActionResult> UpdateSlot(UpdateSlotDto slotDto)
+    {
+        var result = await _slotService.UpdateSlotAsync(slotDto);
+        if (!result.IsSuccess)
+            return BadRequest(result.Error);
+        return Ok(result.Value);
+    }
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteSlot(Guid id)
     {
