@@ -16,7 +16,11 @@ public class EfCoreSlotRepository : ISlotRepository
     {
         return await _context.Slots.ToListAsync();
     }
-
+    public async Task<IEnumerable<Slot>> GetReservedSlotsAsync()
+    {
+        var query = _context.Slots.AsQueryable().AsNoTracking();
+        return await query.Where(s => s.IsReserved).ToListAsync();
+    }
     public async Task<Slot?> GetByIdAsync(Guid id)
     {
         return await _context.Slots.FindAsync(id);
@@ -24,7 +28,7 @@ public class EfCoreSlotRepository : ISlotRepository
 
     public async Task<IEnumerable<Slot>> GetAvailableSlotsAsync()
     {
-        var query = _context.Slots.AsQueryable();
+        var query = _context.Slots.AsQueryable().AsNoTracking();
         return await query.Where(s => !s.IsReserved).ToListAsync();
     }
 
@@ -59,4 +63,6 @@ public class EfCoreSlotRepository : ISlotRepository
         await _context.SaveChangesAsync();
         return true;
     }
+
+   
 }

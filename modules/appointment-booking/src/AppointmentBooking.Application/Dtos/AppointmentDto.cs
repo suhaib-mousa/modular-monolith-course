@@ -1,4 +1,6 @@
-﻿namespace AppointmentBooking.Application.Dtos;
+﻿using AppointmentBooking.Domain.Entities;
+
+namespace AppointmentBooking.Application.Dtos;
 
 public class AppointmentDto
 {
@@ -7,5 +9,5 @@ public class AppointmentDto
     public Guid PatientId { get; set; }
     public string PatientName { get; set; } = string.Empty;
     public DateTime ReservedAt { get; set; }
-    public string Status { get; set; } = string.Empty;
+    public AppointmentStatus Status { get; set; }
 }

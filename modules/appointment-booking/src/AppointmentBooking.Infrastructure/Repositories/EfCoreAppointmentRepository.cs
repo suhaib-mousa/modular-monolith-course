@@ -33,6 +33,11 @@ public class EfCoreAppointmentRepository : IAppointmentRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Appointment>> GetUpcomingAppointmentsAsync()//to do: get the data according to a specific doctor
+    {
+        return await _context.Appointments.Where(x=>x.Status== AppointmentStatus.Reserved).AsNoTracking().ToListAsync();//suppose we have just one doctor
+    }
+
     public async Task<bool> UpdateAsync(Appointment appointment)
     {
         try
