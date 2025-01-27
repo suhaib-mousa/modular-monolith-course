@@ -10,5 +10,7 @@ public interface IAppointmentService
     Task<DoctorAvailability.Domain.Common.Result<IEnumerable<Slot>>> GetDoctorFreeSlotsAsync();
     Task<Result<AppointmentDto>> BookAppointmentAsync(BookAppointmentDto bookingDto);
     Task<Result<AppointmentDto>> GetAppointmentByIdAsync(Guid id);
+    public Task<Result<IEnumerable<AppointmentDto>>> GetUpcomingAppointmentsAsync();
     Task<Result<IEnumerable<AppointmentDto>>> GetPatientAppointmentsAsync(Guid patientId);
+    Task<Result<AppointmentDto>> UpdateAppointmentStatusAsync(AppointmentDto appointmentDto);
 }

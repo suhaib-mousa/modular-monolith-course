@@ -26,6 +26,18 @@ public class SlotService : ISlotService
             return Result<IEnumerable<Slot>>.Failure(ex.Message);
         }
     }
+    public async Task<Result<IEnumerable<Slot>>> GetReservedSlotsAsync()
+    {
+        try
+        {
+            var slots = await _slotRepository.GetReservedSlotsAsync();
+            return Result<IEnumerable<Slot>>.Success(slots);
+        }
+        catch (Exception ex)
+        {
+            return Result<IEnumerable<Slot>>.Failure(ex.Message);
+        }
+    }
 
     public async Task<Result<IEnumerable<Slot>>> GetAvailableSlotsAsync()
     {
@@ -123,4 +135,17 @@ public class SlotService : ISlotService
         existingSlot.IsReserved = true;
         await _slotRepository.UpdateAsync(existingSlot);
     }
+
+    public async Task ChangeSlotAvailabiltyAsync(Guid slotId)
+    {
+        var existingSlot = await _slotRepository.GetByIdAsync(slotId);
+        if (existingSlot == null)
+        {
+            throw new Exception("Slot not found");
+        }
+        existingSlot.IsReserved = false;
+        await _slotRepository.UpdateAsync(existingSlot);
+    }
+
+
 }

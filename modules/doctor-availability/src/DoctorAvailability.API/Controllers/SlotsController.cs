@@ -15,7 +15,7 @@ public class SlotsController : ControllerBase
         _slotService = slotService;
     }
 
-    [HttpGet]
+    [HttpGet("get-all")]
     public async Task<IActionResult> GetAllSlots()
     {
         var result = await _slotService.GetAllSlotsAsync();
@@ -25,7 +25,17 @@ public class SlotsController : ControllerBase
         return Ok(result.Value);
     }
 
-    [HttpPost]
+    [HttpGet("get-reserved-slots")]
+    public async Task<IActionResult> GetReservedSlots()
+    {
+        var result = await _slotService.GetReservedSlotsAsync();
+        if (!result.IsSuccess)
+            return BadRequest(result.Error);
+
+        return Ok(result.Value);
+    }
+
+    [HttpPost("create-slot")]
     public async Task<IActionResult> CreateSlot(CreateSlotDto slotDto)
     {
         var result = await _slotService.CreateSlotAsync(slotDto);
@@ -33,7 +43,7 @@ public class SlotsController : ControllerBase
             return BadRequest(result.Error);
         return Ok(result.Value);
     }
-    [HttpPost]
+    [HttpPut("update-slot")]
     public async Task<IActionResult> UpdateSlot(UpdateSlotDto slotDto)
     {
         var result = await _slotService.UpdateSlotAsync(slotDto);

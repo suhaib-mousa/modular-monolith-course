@@ -6,6 +6,7 @@ namespace DoctorAvailability.Data.Repositories;
 public interface ISlotRepository
 {
     Task<IEnumerable<Slot>> GetAllAsync();
+    Task<IEnumerable<Slot>> GetReservedSlotsAsync();
     Task<Slot?> GetByIdAsync(Guid id);
     Task<IEnumerable<Slot>> GetAvailableSlotsAsync();
     Task<Slot> CreateAsync(Slot slot);
